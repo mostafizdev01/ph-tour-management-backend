@@ -1,9 +1,9 @@
 import jwt, { JwtPayload, SignOptions } from "jsonwebtoken"
 
 export const generateToken = (payload: JwtPayload, secret: string, expiresIn: string) => {
-    const token = jwt.sign(payload, secret, {
+    const token = jwt.sign(payload, secret, { /// ekhane token ta create kora hoise jwt.sign diye..
         expiresIn
-    } as SignOptions)
+    } as SignOptions) ///// SignOptions ta JWT theke neuya hoise
 
     return token
 }

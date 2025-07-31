@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
@@ -30,6 +28,7 @@ import { UserServices } from "./user.service";
 //         next(err)
 //     }
 // }
+
 const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const user = await UserServices.createUser(req.body)
 
@@ -45,12 +44,14 @@ const createUser = catchAsync(async (req: Request, res: Response, next: NextFunc
         data: user,
     })
 })
+
+
 const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
     // const token = req.headers.authorization
     // const verifiedToken = verifyToken(token as string, envVars.JWT_ACCESS_SECRET) as JwtPayload
 
-    const verifiedToken = req.user;
+    const verifiedToken = req.user; // er type ta global interface folder er index.ts file er mordhe create kora hoise
 
     const payload = req.body;
     const user = await UserServices.updateUser(userId, payload, verifiedToken as JwtPayload)
@@ -85,6 +86,8 @@ const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFun
         meta: result.meta
     })
 })
+
+
 const getMe = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const decodedToken = req.user as JwtPayload
     const result = await UserServices.getMe(decodedToken.userId);
@@ -101,6 +104,8 @@ const getMe = catchAsync(async (req: Request, res: Response, next: NextFunction)
         data: result.data
     })
 })
+
+
 const getSingleUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
     const result = await UserServices.getSingleUser(id);

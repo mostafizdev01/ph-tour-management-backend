@@ -8,10 +8,7 @@ import { updateUserZodSchema } from "./user.validation";
 const router = Router()
 
 
-
-router.post("/register",
-    // validateRequest(createUserZodSchema),
-    UserControllers.createUser)
+router.post("/register", UserControllers.createUser)
 router.get("/all-users", checkAuth(Role.ADMIN, Role.SUPER_ADMIN), UserControllers.getAllUsers)
 router.get("/me", checkAuth(...Object.values(Role)), UserControllers.getMe)
 router.get("/:id", checkAuth(Role.ADMIN, Role.SUPER_ADMIN), UserControllers.getSingleUser)

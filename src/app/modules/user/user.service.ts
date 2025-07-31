@@ -8,7 +8,7 @@ import { userSearchableFields } from "./user.constant";
 import { IAuthProvider, IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 
-const createUser = async (payload: Partial<IUser>) => {
+const createUser = async (payload: Partial<IUser>) => { /// Partial mane holo partial IUser er sob data gula optional kore dei. j kono data dilei hobe abar sob gula data dile o hobe..
     const { email, password, ...rest } = payload;
 
     const isUserExist = await User.findOne({ email })
@@ -35,7 +35,7 @@ const createUser = async (payload: Partial<IUser>) => {
 
 const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken: JwtPayload) => {
 
-    if (decodedToken.role === Role.USER || decodedToken.role === Role.GUIDE) {
+    if (decodedToken.role === Role.USER || decodedToken.role === Role.GUIDE) { // ekhabe User and Guide kkokhono tader role update korte perbe na.
         if (userId !== decodedToken.userId) {
             throw new AppError(401, "You are not authorized")
         }
@@ -47,7 +47,7 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
         throw new AppError(httpStatus.NOT_FOUND, "User Not Found")
     }
 
-    if (decodedToken.role === Role.ADMIN && ifUserExist.role === Role.SUPER_ADMIN) {
+    if (decodedToken.role === Role.ADMIN && ifUserExist.role === Role.SUPER_ADMIN) { // admin kokhono super_admin role update korte perbe na
         throw new AppError(401, "You are not authorized")
     }
 
@@ -81,7 +81,6 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
     return newUpdatedUser
 }
 
-
 const getAllUsers = async (query: Record<string, string>) => {
 
     const queryBuilder = new QueryBuilder(User.find(), query)
@@ -102,12 +101,14 @@ const getAllUsers = async (query: Record<string, string>) => {
         meta
     }
 };
+
 const getSingleUser = async (id: string) => {
     const user = await User.findById(id).select("-password");
     return {
         data: user
     }
 };
+
 const getMe = async (userId: string) => {
     const user = await User.findById(userId).select("-password");
     return {

@@ -33,6 +33,8 @@ import { User } from "../user/user.model";
 //     // }
 //     // const accessToken = generateToken(jwtPayload, envVars.JWT_ACCESS_SECRET, envVars.JWT_ACCESS_EXPIRES)
 
+// *** JWT er first ongsho ta holo tader algoridom => secound => userInfo ==> last ==> tader secret ==> tarai ai token ta dise naki seita validation kore ***
+
 //     // const refreshToken = generateToken(jwtPayload, envVars.JWT_REFRESH_SECRET, envVars.JWT_REFRESH_EXPIRES)
 
 //     const userTokens = createUserTokens(isUserExist)
@@ -49,6 +51,7 @@ import { User } from "../user/user.model";
 //     }
 
 // }
+
 const getNewAccessToken = async (refreshToken: string) => {
     const newAccessToken = await createNewAccessTokenWithRefreshToken(refreshToken)
 
@@ -57,6 +60,7 @@ const getNewAccessToken = async (refreshToken: string) => {
     }
 
 }
+
 const resetPassword = async (payload: Record<string, any>, decodedToken: JwtPayload) => {
     if (payload.id != decodedToken.userId) {
         throw new AppError(401, "You can not reset your password")
@@ -76,6 +80,7 @@ const resetPassword = async (payload: Record<string, any>, decodedToken: JwtPayl
 
     await isUserExist.save()
 }
+
 const forgotPassword = async (email: string) => {
     const isUserExist = await User.findOne({ email });
 
@@ -118,6 +123,7 @@ const forgotPassword = async (email: string) => {
      * http://localhost:5173/reset-password?id=687f310c724151eb2fcf0c41&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODdmMzEwYzcyNDE1MWViMmZjZjBjNDEiLCJlbWFpbCI6InNhbWluaXNyYXI2QGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzUzMTY2MTM3LCJleHAiOjE3NTMxNjY3Mzd9.LQgXBmyBpEPpAQyPjDNPL4m2xLF4XomfUPfoxeG0MKg
      */
 }
+
 const setPassword = async (userId: string, plainPassword: string) => {
     const user = await User.findById(userId);
 
@@ -148,6 +154,7 @@ const setPassword = async (userId: string, plainPassword: string) => {
     await user.save()
 
 }
+
 const changePassword = async (oldPassword: string, newPassword: string, decodedToken: JwtPayload) => {
 
     const user = await User.findById(decodedToken.userId)

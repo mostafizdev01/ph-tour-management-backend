@@ -72,6 +72,7 @@ const credentialsLogin = catchAsync(async (req: Request, res: Response, next: Ne
 
 
 })
+
 const getNewAccessToken = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
@@ -93,6 +94,7 @@ const getNewAccessToken = catchAsync(async (req: Request, res: Response, next: N
         data: tokenInfo,
     })
 })
+
 const logout = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     res.clearCookie("accessToken", {
@@ -113,6 +115,7 @@ const logout = catchAsync(async (req: Request, res: Response, next: NextFunction
         data: null,
     })
 })
+
 const changePassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     const newPassword = req.body.newPassword;
@@ -128,6 +131,7 @@ const changePassword = catchAsync(async (req: Request, res: Response, next: Next
         data: null,
     })
 })
+
 const resetPassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     const decodedToken = req.user
@@ -141,6 +145,7 @@ const resetPassword = catchAsync(async (req: Request, res: Response, next: NextF
         data: null,
     })
 })
+
 const setPassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     const decodedToken = req.user as JwtPayload
@@ -155,6 +160,7 @@ const setPassword = catchAsync(async (req: Request, res: Response, next: NextFun
         data: null,
     })
 })
+
 const forgotPassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
 
@@ -169,6 +175,7 @@ const forgotPassword = catchAsync(async (req: Request, res: Response, next: Next
         data: null,
     })
 })
+
 const googleCallbackController = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
     let redirectTo = req.query.state ? req.query.state as string : ""

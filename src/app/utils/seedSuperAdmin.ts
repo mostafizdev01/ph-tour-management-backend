@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bcryptjs from "bcryptjs";
 import { envVars } from "../config/env";
 import { IAuthProvider, IUser, Role } from "../modules/user/user.interface";
@@ -27,12 +28,11 @@ export const seedSuperAdmin = async () => {
             email: envVars.SUPER_ADMIN_EMAIL,
             password: hashedPassword,
             isVerified: true,
-            auths: [authProvider]
-
+            auths: [authProvider] // auths name database er mordhe ekta field create hobe
         }
 
         const superadmin = await User.create(payload)
-        console.log("Super Admin Created Successfuly! \n");
+        console.log("Super Admin Created Successfuly! \n"); // \n == mane holo == log(super admin ta next line a console log hobe)
         console.log(superadmin);
     } catch (error) {
         console.log(error);
