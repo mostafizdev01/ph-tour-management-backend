@@ -6,7 +6,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { UserServices } from "./user.service";
 
-// const createUserFunction = async (req: Response, res: Response) => {
+// const createUserFunction = async (req: Response, res: Response) => { // ai controler comment korsi because login er kaj ta amara passport js er local login handle korsi.
 
 //     const user = await UserServices.createUser(req.body)
 

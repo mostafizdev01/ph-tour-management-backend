@@ -42,7 +42,7 @@ import { User } from "../user/user.model";
 //     // delete isUserExist.password;
 
 //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//     const { password: pass, ...rest } = isUserExist.toObject()
+//     const { password: pass, ...rest } = isUserExist.toObject() // hijibiji response k object akyare kore dibe toObject() function ta.
 
 //     return {
 //         accessToken: userTokens.accessToken,

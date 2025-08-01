@@ -12,13 +12,13 @@ import { router } from "./app/routes";
 const app = express()
 
 
-app.use(expressSession({
+app.use(expressSession({ // passport js er expressSessin use kora hoise ekhane
     secret: envVars.EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize()) // atr mane passport bujlo ai project a pasport js setup kora hoise
+app.use(passport.session())  /// passport use kore passport tar nijer mordhe tar outhentication handle korbe.
 app.use(cookieParser())
 app.use(express.json())
 app.set("trust proxy", 1);

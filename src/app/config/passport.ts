@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import bcryptjs from "bcryptjs";
 import passport from "passport";
@@ -70,20 +71,20 @@ passport.use(
             clientID: envVars.GOOGLE_CLIENT_ID,
             clientSecret: envVars.GOOGLE_CLIENT_SECRET,
             callbackURL: envVars.GOOGLE_CALLBACK_URL
-        }, async (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
+        }, async (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => { // GoogleStrategy er mordhe amara ai function er parametter gula paitesi ja amara GoogleStrategy k hover korle dekhte perbo. er ai parametter gula passport-google theke import kora hoise
 
             try {
-                const email = profile.emails?.[0].value;
+                const email = profile.emails?.[0].value; // amara jokhon email diye login korte jai tokhon amra profile thke amader email ta nei
 
-                if (!email) {
-                    return done(null, false, { mesaage: "No email found" })
+                if (!email) { // profile er mordhe jodi email ta na ashe taile amra ai error ta show korabo
+                    return done(null, false, { mesaage: "No email found" }) /// done function ta amar passport js theke pai
                 }
 
                 let isUserExist = await User.findOne({ email })
                 if (isUserExist && !isUserExist.isVerified) {
                     // throw new AppError(httpStatus.BAD_REQUEST, "User is not verified")
                     // done("User is not verified")
-                    return done(null, false, { message: "User is not verified" })
+                    return done(null, false, { message: "User is not verified" }) // done er parametter gula amra done function theke pai. ja amara done function ta k hover korlei dekhte pari
                 }
 
                 if (isUserExist && (isUserExist.isActive === IsActive.BLOCKED || isUserExist.isActive === IsActive.INACTIVE)) {
@@ -101,7 +102,7 @@ passport.use(
                         email,
                         name: profile.displayName,
                         picture: profile.photos?.[0].value,
-                        role: Role.USER,
+                        role: Role.USER, // role ta interface theke niye ashe bohabo hoise.
                         isVerified: true,
                         auths: [
                             {

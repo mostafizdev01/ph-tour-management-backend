@@ -65,9 +65,9 @@ const credentialsLogin = catchAsync(async (req: Request, res: Response, next: Ne
     // })
 
 
-    // res.cookie("refreshToken", loginInfo.refreshToken, {
-    //     httpOnly: true,
-    //     secure: false,
+    // res.cookie("refreshToken", loginInfo.refreshToken, { // cookie er mordhe refreshToken name ekta token add hobe. and token ta loginInfo.refreshToken er mordhe theke ashbe
+    //     httpOnly: true, // httpOny na dile frontend er mordhe cookie ta set korte dibe na.
+    //     secure: false,  
     // })
 
 
@@ -85,7 +85,7 @@ const getNewAccessToken = catchAsync(async (req: Request, res: Response, next: N
     //     secure: false
     // })
 
-    setAuthCookie(res, tokenInfo);
+    setAuthCookie(res, tokenInfo);  // ekhane utilis folder er mordhe setCookie file ta k call kortese
 
     sendResponse(res, {
         success: true,
@@ -191,18 +191,11 @@ const googleCallbackController = catchAsync(async (req: Request, res: Response, 
         throw new AppError(httpStatus.NOT_FOUND, "User Not Found")
     }
 
-    const tokenInfo = createUserTokens(user)
+    const tokenInfo = createUserTokens(user)  // login user info diye amara ekta token crate kortesi => createUuserTokens function er mardhome
 
-    setAuthCookie(res, tokenInfo)
+    setAuthCookie(res, tokenInfo) // token ta set korar jonno setAuthCookie er mordhe pathaiya dilam
 
-    // sendResponse(res, {
-    //     success: true,
-    //     statusCode: httpStatus.OK,
-    //     message: "Password Changed Successfully",
-    //     data: null,
-    // })
-
-    res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`)
+    res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`) /// login success hoile amra frontend er url a pathaitesi
 })
 
 export const AuthControllers = {

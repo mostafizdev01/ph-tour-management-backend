@@ -21,8 +21,8 @@ router.post("/reset-password", checkAuth(...Object.values(Role)), AuthController
 //  /booking -> /login -> succesful google login -> /booking frontend
 // /login -> succesful google login -> / frontend
 router.get("/google", async (req: Request, res: Response, next: NextFunction) => {
-    const redirect = req.query.redirect || "/"
-    passport.authenticate("google", { scope: ["profile", "email"], state: redirect as string })(req, res, next)
+    const redirect = req.query.redirect || "/" /// jodi user er redirect url thake taile ami take redirect url a pathaiye dibo. or take home page a pathaiye dibo
+    passport.authenticate("google", { scope: ["profile", "email"], state: redirect as string })(req, res, next) /// passport.authenticate => aita passport theke ashe ==> er credential hobe => google ==> scope mane ami ki ki data niye chaitesi => scope => profile, email => state => mane ami kon route a hit kore login route a aschilam ami abar oi route a redirect kore dibo =>> then ai fucntion ta k call korte hobe => tar mordhe req, res, next ta diye dilam.
 })
 
 // api/v1/auth/google/callback?state=/booking
