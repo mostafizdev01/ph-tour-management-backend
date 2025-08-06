@@ -31,34 +31,40 @@ export const globalErrorHandler = async (err: any, req: Request, res: Response, 
     let message = "Something Went Wrong!!"
 
     //Duplicate error
-    if (err.code === 11000) {
+    if (err.code === 11000) { // jodi kono ekta field duplicate korar try kori taile ai error ta call hobe
         const simplifiedError = handlerDuplicateError(err)
         statusCode = simplifiedError.statusCode;
         message = simplifiedError.message
     }
+
     // Object ID error / Cast Error
-    else if (err.name === "CastError") {
+    else if (err.name === "CastError") { // jodi real object id ta na dei taile ai error ta call hobe
         const simplifiedError = handleCastError(err)
         statusCode = simplifiedError.statusCode;
         message = simplifiedError.message
     }
+
     else if (err.name === "ZodError") {
         const simplifiedError = handlerZodError(err)
         statusCode = simplifiedError.statusCode
         message = simplifiedError.message
         errorSources = simplifiedError.errorSources as TErrorSources[]
     }
+
     //Mongoose Validation Error
-    else if (err.name === "ValidationError") {
+    else if (err.name === "ValidationError") { // jodi amra type maintain na kori taile ai error function ta call hobe. example:- jodi number er jaigai string pathai.
         const simplifiedError = handlerValidationError(err)
         statusCode = simplifiedError.statusCode;
         errorSources = simplifiedError.errorSources as TErrorSources[]
         message = simplifiedError.message
     }
-    else if (err instanceof AppError) {
+
+    else if (err instanceof AppError) {  // kono ekta logic building korte giye error hoile ata show korbe
         statusCode = err.statusCode
         message = err.message
-    } else if (err instanceof Error) {
+    }
+    
+    else if (err instanceof Error) {
         statusCode = 500;
         message = err.message
     }
@@ -67,7 +73,7 @@ export const globalErrorHandler = async (err: any, req: Request, res: Response, 
         success: false,
         message,
         errorSources,
-        err: envVars.NODE_ENV === "development" ? err : null,
+        err: envVars.NODE_ENV === "development" ? err : null,  /// jodi amra developmetn fetch a thaki taile error gula show korbe.
         stack: envVars.NODE_ENV === "development" ? err.stack : null
     })
 }

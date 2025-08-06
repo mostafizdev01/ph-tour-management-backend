@@ -13,9 +13,9 @@ import { createUserTokens } from "../../utils/userTokens"
 import { AuthServices } from "./auth.service"
 
 const credentialsLogin = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // const loginInfo = await AuthServices.credentialsLogin(req.body)
+    // const loginInfo = await AuthServices.credentialsLogin(req.body) /// ==>> tar poriborte passport js er local Stategy use kora hoise tai aita comment kora hoise.
 
-    passport.authenticate("local", async (err: any, user: any, info: any) => {
+    passport.authenticate("local", async (err: any, user: any, info: any) => { // error || user || info ==> ai parametter gula passport js file theke ashtese.
 
         if (err) {
 
@@ -28,30 +28,30 @@ const credentialsLogin = catchAsync(async (req: Request, res: Response, next: Ne
             // ✅✅✅✅
             // return next(err)
             // console.log("from err");
-            return next(new AppError(401, err))
+            return next(new AppError(401, err)) // ekhane request er next function ta k call kora hoise. niche menually function ta k call korar jonno ekhane passport er mordhe next fucntion ta amra peye jaitesi.
         }
 
         if (!user) {
             // console.log("from !user");
             // return new AppError(401, info.message)
-            return next(new AppError(401, info.message))
+            return next(new AppError(401, info.message)) /// info.message ta passport.ts file er error message theke show korbe
         }
 
-        const userTokens = await createUserTokens(user)
+        const userTokens = await createUserTokens(user) // user er morhe user er infomation gula thakbe. and user er info gula diye token create kora hobe
 
         // delete user.toObject().password
 
         const { password: pass, ...rest } = user.toObject()
 
 
-        setAuthCookie(res, userTokens)
+        setAuthCookie(res, userTokens) // token ta k cookies er mordhe set kora hoise
 
         sendResponse(res, {
             success: true,
             statusCode: httpStatus.OK,
             message: "User Logged In Successfully",
-            data: {
-                accessToken: userTokens.accessToken,
+            data: {  // ai token gula amara frontend er cookies er morhe set kore dibo
+                accessToken: userTokens.accessToken, 
                 refreshToken: userTokens.refreshToken,
                 user: rest
 

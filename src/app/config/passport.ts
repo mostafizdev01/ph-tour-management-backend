@@ -9,11 +9,11 @@ import { User } from "../modules/user/user.model";
 import { envVars } from "./env";
 
 
-passport.use(
-    new LocalStrategy({
-        usernameField: "email",
-        passwordField: "password"
-    }, async (email: string, password: string, done) => {
+passport.use( // login user useing passport Js
+    new LocalStrategy({ /// LocalStrategy name ta import er somoy Strategy the as diye rename kora hoise
+        usernameField: "email", /// usernameField name ta passport er deuya and amra take email name convert korlam
+        passwordField: "password" // passwordField name ta passport er deuya and amra take password name convert korlam
+    }, async (email: string, password: string, done) => { /// received this parametter
         try {
             const isUserExist = await User.findOne({ email })
 
@@ -40,9 +40,9 @@ passport.use(
             }
 
 
-            const isGoogleAuthenticated = isUserExist.auths.some(providerObjects => providerObjects.provider == "google")
+            const isGoogleAuthenticated = isUserExist.auths.some(providerObjects => providerObjects.provider == "google") /// some => ata map function er moto loop er kaj kore. database a auths akta array some => auths er upor loop chalai and dekhe user ashole ki vabe login korse. || Google || Creadentials.
 
-            if (isGoogleAuthenticated && !isUserExist.password) {
+            if (isGoogleAuthenticated && !isUserExist.password) { // user jodi google diye login kore and tar jodi password na thake taile ai Error ta show korbe
                 return done(null, false, { message: "You have authenticated through Google. So if you want to login with credentials, then at first login with google and set a password for your Gmail and then you can login with email and password." })
             }
 

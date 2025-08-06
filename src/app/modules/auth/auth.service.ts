@@ -12,7 +12,7 @@ import { IAuthProvider, IsActive } from "../user/user.interface";
 import { User } from "../user/user.model";
 
 
-// const credentialsLogin = async (payload: Partial<IUser>) => {
+// const credentialsLogin = async (payload: Partial<IUser>) => { // comment this function because it's login useing pasport js
 //     const { email, password } = payload;
 
 //     const isUserExist = await User.findOne({ email })
@@ -31,10 +31,8 @@ import { User } from "../user/user.model";
 //     //     email: isUserExist.email,
 //     //     role: isUserExist.role
 //     // }
+
 //     // const accessToken = generateToken(jwtPayload, envVars.JWT_ACCESS_SECRET, envVars.JWT_ACCESS_EXPIRES)
-
-// *** JWT er first ongsho ta holo tader algoridom => secound => userInfo ==> last ==> tader secret ==> tarai ai token ta dise naki seita validation kore ***
-
 //     // const refreshToken = generateToken(jwtPayload, envVars.JWT_REFRESH_SECRET, envVars.JWT_REFRESH_EXPIRES)
 
 //     const userTokens = createUserTokens(isUserExist)

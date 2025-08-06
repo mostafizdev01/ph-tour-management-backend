@@ -14,9 +14,9 @@ export interface ITour {
     departureLocation?: string;
     arrivalLocation?: string;
     endDate?: Date;
-    included?: string[];
+    included?: string[]; // user ki ki faselatis pabe tar array hobe
     excluded?: string[]
-    amenities?: string[];
+    amenities?: string[]; // tala ki ki dibe.
     tourPlan?: string[];
     maxGuest?: number;
     minAge?: number;

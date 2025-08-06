@@ -4,7 +4,7 @@ import express, { Request, Response } from "express";
 import expressSession from "express-session";
 import passport from "passport";
 import { envVars } from "./app/config/env";
-import "./app/config/passport";
+import "./app/config/passport"; // passport js er joto kaj kora hoise sob kicu ekhane chole ashbe
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
 import { router } from "./app/routes";

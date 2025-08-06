@@ -28,7 +28,7 @@ const tourSchema = new Schema<ITour>({
     minAge: { type: Number },
     division: {
         type: Schema.Types.ObjectId,
-        ref: "Division",
+        ref: "Division", /// ref => amra kon collection er anta lageitesi => amara division model er sate connect kortesi
         required: true
     },
     tourType: {

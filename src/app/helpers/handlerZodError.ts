@@ -9,7 +9,7 @@ export const handlerZodError = (err: any): TGenericErrorResponse => {
             //path : "nickname iside lastname inside name"
             // path: issue.path.length > 1 && issue.path.reverse().join(" inside "),
 
-            path: issue.path[issue.path.length - 1],
+            path: issue.path[issue.path.length - 1], // last er field ta show kore
             message: issue.message
         })
     })
